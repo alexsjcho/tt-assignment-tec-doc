@@ -392,6 +392,16 @@ These are the issues that tend to come up while building against this API, as op
 ---
 
 ## 5. Follow up Questions
+### Q1. Previous technical writing examples
+
+> *Do you have any writing samples, technical tutorials, or code repositories (e.g., GitHub) to share that demonstrate your ability to explain complex technical or AI concepts?*
+
+[Building Agora Use Cases](https://drive.google.com/file/d/1iai6K2x_Fi9max1P1gyL5f-_qwC3wElm/view)
+[Agora vs Zoom Video SDK Benchmark](https://www.agora.io/en/blog/agora-vs-zoom-look-at-the-big-picture/)
+[ByteDance Bits Server Side Platform Tutorial](https://drive.google.com/file/d/1GotzTXtNO6rA_wJTUdmFjTjG4FwExb-9/view)
+[ByteDance Bits New Dev Hire Course](https://drive.google.com/file/d/1qVUL0tudx-PeQCVo_c9D60BAD7IfnccD/view)
+
+
 
 ### Q2. Evaluating the existing docs for RAG consumption
 
