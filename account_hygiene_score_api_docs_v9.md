@@ -1,9 +1,5 @@
 # Account Hygiene Score API Documentation
 
-**Last updated:** July 2026
-**Audience:** Developers integrating with the TikTok for Business Ads API
-**Keywords:** Account Hygiene Score, AHS API, TikTok Ads API, account optimization score, campaign suggestions, ad group configuration, creative refresh, PRS, AOS, CMS
-
 ---
 
 ## Table of Contents
