@@ -487,8 +487,9 @@ Risks and how I'd mitigate them:
 > *Original question: What is your favorite technical documentation site or developer portal specifically for an AI product (e.g., OpenAI, Anthropic, Hugging Face, LangChain) and why? (Answer this question in Chinese)*
 
 我最喜欢的是Anthropic的开发者文档站(docs.claude.com)。原因主要有几点:
-- **Claude本身对自己的产品文档有原生感知:**Claude把查阅自己的产品文档和事实信息当作一项内置技能来调用,而不是单纯依赖训练时记下来的旧知识。这样当用户问到Claude自身产品的具体细节、功能变化或者故障排查时,它会先去核实最新文档再回答,处理和Claude相关的问题时体验会顺畅很多,不用担心答案是过时或者编造的。
-- 
+
+- **Claude本身对自己的产品文档有原生感知**:Claude把查阅自己的产品文档和事实信息当作一项内置技能来调用,而不是单纯依赖训练时记下来的旧知识。这样当用户问到Claude自身产品的具体细节、功能变化或者故障排查时,它会先去核实最新文档再回答,处理和Claude相关的问题时体验会顺畅很多,不用担心答案是过时或者编造的。
+  
 - **参考文档和教程分开清晰**:它把参考文档和实操教程分开得很清楚,你可以很快找到你需要的那种内容,而不用在一个大而全的页面里来回翻。
 
 - **代码示例可直接运行,多语言覆盖**:几乎每一个概念旁边都配了可以直接跑的代码示例,而且是多语言的(Python、TypeScript、curl等),这对开发者来说非常实用,不需要自己再去翻译示例代码。
