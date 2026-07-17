@@ -1,1 +1,3 @@
-# tt-assignment-tec-doc
+# Instructions
+
+Read the .md file 
