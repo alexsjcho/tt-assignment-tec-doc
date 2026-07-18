@@ -31,7 +31,7 @@
 
 ## 1. Overview
 
-The Account Hygiene Score (AHS) API lets advertisers and their tooling pull a health score for one or more advertiser accounts, plus a set of concrete suggestions for improving that score. The score is built from three dimensions:
+The Account Hygiene Score (AHS) API allows advertisers to pull a health score for one or more advertiser accounts, which also includes a set of concrete suggestions for improving that score. The score is built from three dimensions:
 
 - **AOS (Ad group Optimization Score):** how well ad groups are configured
 - **CMS (Creative Management Score):** how often creative assets are refreshed
@@ -424,7 +424,7 @@ These are the issues that tend to come up while building against this API, as op
 
 > *Original question: Evaluate the existing documentation on our website (https://business-api.tiktok.com/portal/docs?id=1797738007505921). How would you restructure or rewrite this material so that an AI agent or LLM (using Retrieval-Augmented Generation) could more accurately consume and retrieve this information for a user?*
 
-I tried pulling the live page directly (`https://business-api.tiktok.com/portal/docs?id=1797738007505921`) and it's rendered client side, so the actual doc content doesn't come through in a plain fetch, only the page shell and meta tags. That itself is worth flagging as an RAG problem: if a retrieval pipeline can't render JS, it never sees the content at all. Based on the structure of the spec doc I was given for this exercise, which mirrors how TikTok's business API docs are typically laid out, here's how I'd restructure it for RAG consumption.
+I used Claude to pull the live page directly (https://business-api.tiktok.com/portal/docs?id=1797738007505921) and got a firsthand look at exactly this problem: the page renders client side, so a plain fetch returns only the page shell and meta tags, not the actual documentation content. Most retrieval pipelines fetch raw HTML and don't execute JavaScript, so a client side rendered page like this one is effectively invisible to them. A RAG pipeline's crawler generally isn't a full browser, it's making an HTTP request and parsing whatever comes back, and for a client side rendered page what comes back is an empty shell with the real content assembled later by JavaScript running in a browser. No browser, no content, so the retrieval index ends up with metadata and navigation chrome instead of the tables, field descriptions, and examples a developer actually needs. Based on the structure of the spec doc I was given for this exercise, which mirrors how TikTok's business API docs are typically laid out, here's how I'd restructure it for RAG consumption.
 
 The biggest issue with docs like this one is that they're built as giant nested tables meant for a human to scan visually. A person can follow the indentation and "only return when suggestion_type = X" notes because they can see the whole table at once. An LLM chunking this content for embeddings usually cannot, since chunk boundaries cut through the middle of a table and the model loses the parent context (which suggestion_type a given field belongs to) by the time it retrieves that chunk.
 
@@ -494,7 +494,8 @@ Rough steps:
 Risks and how I'd mitigate them:
 
 - **Hallucinated fields or behavior.** The model can invent a field or parameter that sounds plausible but doesn't exist. Mitigation: never let generated docs publish without diffing them against the actual spec or a live API response, ideally with an automated check, not just a human skim.
-- **Stale docs that look confidently correct.** Generated prose reads polished even when it's wrong, which makes errors harder to catch than in obviously rough draft. Mitigation: tie doc generation to the same CI pipeline as the API itself, so a spec change triggers a re-generation and a diff review, instead of docs drifting silently out of sync.
+- **Stale docs that look confidently correct.** Generated docs reads polished even when it's wrong, which makes errors harder to catch. Mitigation: tie doc generation to the same CI pipeline as the API itself, so a spec change triggers a re-generation and a diff review, instead of docs drifting silently out of sync.
+
 - **Voice inconsistency across a large doc set.** Without a locked style guide in the prompt, tone drifts between generation runs. Mitigation: keep the style guide and templates versioned and reused for every run, don't regenerate the prompt from memory each time.
 - **Over reliance replacing subject matter expert review.** It's tempting to publish straight from the model once it "looks right." Mitigation: keep a required human review step in the pipeline, specifically scoped to accuracy rather than wording, so the human isn't just re-reading prose for typos.
 - **New docs quietly contradicting existing docs.** A generated page can be accurate on its own yet conflict with something already published, like a differing default value or permission rule. Mitigation: gate releases on evals that diff new pages against the existing doc corpus and block publish on contradictions.
