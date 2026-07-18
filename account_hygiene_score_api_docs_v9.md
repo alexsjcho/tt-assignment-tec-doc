@@ -175,7 +175,24 @@ The shape of `suggestion_details` changes depending on `suggestion_type`. Only t
 | Field | Type | Notes |
 |---|---|---|
 | `need_adjust_budget_ad_group_count` | number | Ad groups under non dedicated campaigns only. Real time. |
-| `suggestion_budget_details` | object[] | Each item has `entity_id`, `entity_type` (`CAMPAIGN` or `ADGROUP`), `current_budget`, and `suggest_budget`. Budget values refresh daily. |
+
+
+**Fields within each `suggestion_budget_details` item**
+
+| Field | Type | Notes |
+|---|---|---|
+| `need_adjust_budget_ad_group_count` | number | Ad groups under non dedicated campaigns only. Real time. |
+| `suggestion_budget_details` | object[] | List of budget change entries, one per entity. Refreshes daily. Each item's fields are broken out below. |
+
+**Fields within each `suggestion_budget_details` item**
+
+| Field | Type | Notes |
+|---|---|---|
+| `entity_id` | string | ID of the campaign or ad group the budget change applies to. |
+| `entity_type` | string | Enum: `CAMPAIGN`, `ADGROUP`. |
+| `current_budget` | float | Current budget of the ad group or dedicated campaign. Updated on a daily basis. |
+| `suggest_budget` | float | Suggested budget of the ad group or dedicated campaign. Updated on a daily basis. |
+
 
 **When `suggestion_type = CREATE_AD_WITH_NEW_CREATIVE`**
 
